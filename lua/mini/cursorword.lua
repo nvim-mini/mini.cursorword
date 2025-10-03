@@ -1,10 +1,7 @@
 --- *mini.cursorword* Autohighlight word under cursor
---- *MiniCursorword*
 ---
 --- MIT License Copyright (c) 2021 Evgeni Chasnovski
----
---- ==============================================================================
----
+
 --- Features:
 --- - Autohighlight word under cursor with customizable delay.
 ---
@@ -32,17 +29,17 @@
 ---
 --- # Highlight groups ~
 ---
---- * `MiniCursorword` - highlight group of a non-current cursor word.
+--- - `MiniCursorword` - highlight group of a non-current cursor word.
 ---   Default: plain underline.
 ---
---- * `MiniCursorwordCurrent` - highlight group of a current word under cursor.
+--- - `MiniCursorwordCurrent` - highlight group of a current word under cursor.
 ---   Default: links to `MiniCursorword` (so `:hi clear MiniCursorwordCurrent`
 ---   will lead to showing `MiniCursorword` highlight group).
 ---   Note: To not highlight it, use the following Lua code: >lua
 ---
 ---   vim.api.nvim_set_hl(0, 'MiniCursorwordCurrent', {})
 --- <
---- To change any highlight group, modify it directly with |:highlight|.
+--- To change any highlight group, set it directly with |nvim_set_hl()|.
 ---
 --- # Disabling ~
 ---
@@ -77,6 +74,7 @@
 ---   -- Make sure to add this autocommand *before* calling module's `setup()`.
 ---   vim.cmd('au CursorMoved * lua _G.cursorword_blocklist()')
 --- <
+---@tag MiniCursorword
 
 -- Module definition ==========================================================
 local MiniCursorword = {}
@@ -108,9 +106,7 @@ MiniCursorword.setup = function(config)
   H.create_default_hl()
 end
 
---- Module config
----
---- Default values:
+--- Defaults ~
 ---@eval return MiniDoc.afterlines_to_code(MiniDoc.current.eval_section)
 MiniCursorword.config = {
   -- Delay (in ms) between when cursor moved and when highlighting appeared
